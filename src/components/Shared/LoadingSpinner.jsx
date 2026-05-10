@@ -3,15 +3,16 @@ import { ScaleLoader } from 'react-spinners'
 const LoadingSpinner = ({ smallHeight }) => {
   return (
     <div
-      className={` ${smallHeight ? 'h-[250px]' : 'h-[70vh]'}
+      className="bg-red-300"
+      className={`bg-red-50  ${smallHeight ? "h-[250px]" : "h-[70vh]"}
       flex 
       flex-col 
       justify-center 
       items-center `}
     >
-      <ScaleLoader size={100} color='lime' />
+      <ScaleLoader size={100} color="red" />
     </div>
-  )
+  );
 }
 
 export default LoadingSpinner

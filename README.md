@@ -1,7 +1,19 @@
 #  Blood Donation Application
 
+Admin email:  muyed@gmail.com
+Admin password:  muyed@gmail.com
+Front-end Live Site Link: 
+Client Side GitHub Repository Link: 
+Server Side GitHub Repository Link:
+<!-- Volunteer -->
+volunteer : mran1@gmail.com
+volunteerPass : mran1@gmail.com
+<!-- Donor -->
+donorEmai: abdulla@gmail.com
+DonerPass: abdulla@gmail.com
+
 ## 📌 Project Name
-**Blood Donation Application (B12-A11-C01)**
+**Blood Donation Application (B12-A11-C0     )**
 
 ##  Purpose
 The Blood Donation Application is a MERN stack based web platform designed to connect blood donors with recipients efficiently.  
@@ -132,19 +144,16 @@ This project is developed as part of **B12 A11 Category-01 Assignment** followin
 
 ---
 
-##  Submission Info
+##  Submission 
 
-**Admin Email:** admin@example.com  
+
+
+
+<!-- **Admin Email:** admin@example.com  
 **Admin Password:** admin123  
 
 **Front-end Live Site:** https://blood-donation-client-a11.netlify.app/  
 **Client Side GitHub Repository:** (add your client repo link)  
-**Server Side GitHub Repository:** (add your server repo link)
+**Server Side GitHub Repository:** (add your server repo link) -->
 
 ---
-
-##  Notes
-- Minimum 20 meaningful commits on client side
-- Minimum 12 meaningful commits on server side
-- No project similarity with module/assignment work
-- All deployment rules followed

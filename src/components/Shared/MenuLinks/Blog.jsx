@@ -5,26 +5,29 @@ const blogData = [
   {
     id: 1,
     title: "Importance of Blood Donation",
-    excerpt: "Learn why donating blood is essential and how it saves lives every day.",
+    excerpt:
+      "Learn why donating blood is essential and how it saves lives every day.",
     author: "Admin",
-    date: "2025-12-18",
-    image: "https://source.unsplash.com/400x250/?blood-donation",
+    date: "2026-8-18",
+    image: "https://i.ibb.co.com/tTgrzyBC/blood-donation.jpg",
   },
   {
     id: 2,
     title: "How to Prepare for Blood Donation",
-    excerpt: "Tips and guidelines for donors before donating blood to ensure safety and comfort.",
+    excerpt:
+      "Tips and guidelines for donors before donating blood to ensure safety and comfort.",
     author: "Volunteer Team",
-    date: "2025-12-15",
-    image: "https://source.unsplash.com/400x250/?donor",
+    date: "2026-8-15",
+    image: "https://i.ibb.co.com/jkprct21/donor.jpg",
   },
   {
     id: 3,
     title: "Who Can Donate Blood?",
-    excerpt: "Understand eligibility criteria for blood donation to help save lives efficiently.",
+    excerpt:
+      "Understand eligibility criteria for blood donation to help save lives efficiently.",
     author: "Health Expert",
-    date: "2025-12-12",
-    image: "https://source.unsplash.com/400x250/?healthcare",
+    date: "2026-07-15",
+    image: "https://i.ibb.co.com/6cj9yBSv/healthcare.jpg",
   },
 ];
 
