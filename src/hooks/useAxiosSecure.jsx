@@ -18,7 +18,6 @@ const useAxiosSecure = () => {
       //   Request Interceptor
       const requestInterceptor = axiosInstance.interceptors.request.use(
         async (config) => {
-          // getIdToken()  -->>> token expire --> auto refresh 
           const token = await user.getIdToken();
           config.headers.Authorization = `Bearer ${token}`;
           return config;

@@ -241,7 +241,7 @@ const AllBloodDonationRequests = () => {
             className="px-4 py-2 rounded-lg border text-sm
             disabled:opacity-40 bg-white hover:bg-red-50"
           >
-            ← Prev
+           --Prev
           </button>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button

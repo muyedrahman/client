@@ -209,17 +209,7 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // {
-      //   path: "all-AllUsers.jsx users",
-      //   element: (
-      //     <PrivateRoute>
-      //       <AdminRoute>
-      //         <AllUsers></AllUsers>
-      //       </AdminRoute>
-      //     </PrivateRoute>
-      //   ),
-      // },
-      //Volunteer Route
+      
     ],
   },
 ]);

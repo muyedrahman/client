@@ -42,7 +42,7 @@ const Profile = () => {
     fetchUser();
   }, [user?.email]);
 
-  // district change (NAME based FIXED)
+  // district change  
   const handleDistrictChange = (e) => {
     const selectedName = e.target.value;
 

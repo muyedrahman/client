@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [filter, setFilter] = useState("");
-// XSrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+   
   //  TanStack Query ->>> data fetch
   const {
     data: users = [],
@@ -41,7 +41,7 @@ const AllUsers = () => {
     if (result.isConfirmed) {
       try {
         await axiosSecure.patch(`/users/${id}/status`, { status: newStatus });
-        refetch(); // ✅ Table refresh
+        refetch();  
         Swal.fire("Done!", `User ${newStatus} successfully`, "success");
       } catch (error) {
         Swal.fire("Error!", "Something went wrong", "error");
@@ -63,7 +63,7 @@ const AllUsers = () => {
     if (result.isConfirmed) {
       try {
         await axiosSecure.patch(`/users/${id}/role`, { role });
-        refetch(); //  Table refresh
+        refetch();  
         Swal.fire("Done!", `User is now ${role}`, "success");
       } catch (error) {
         Swal.fire("Error!", "Something went wrong", "error");
@@ -128,11 +128,10 @@ const AllUsers = () => {
                 <td className="py-3 px-4">
                   {/* avatar */}
                   <img
-                    src={user.image || "https://i.pravatar.cc/100"} //  avatar
+                    src={user.image || "https://i.pravatar.cc/100"} 
                     alt={user.name}
                     className="w-10 h-10 rounded-full object-cover"
                   />
-                  
                 </td>
 
                 <td className="py-3 px-4">{user.name}</td>
@@ -171,7 +170,7 @@ const AllUsers = () => {
                 {/*  Action Buttons */}
                 <td className="py-3 px-4">
                   <div className="flex flex-wrap gap-2">
-                    {/* Block / Unblock */}
+                    
                     <button
                       onClick={() =>
                         handleStatus(user._id, user.status || "active")
@@ -197,7 +196,6 @@ const AllUsers = () => {
                       </button>
                     )}
 
-                   
                     {user.role !== "admin" && (
                       <button
                         onClick={() => handleRole(user._id, "admin")}
@@ -227,7 +225,3 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
- 
-
-
-

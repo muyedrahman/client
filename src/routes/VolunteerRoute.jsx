@@ -24,28 +24,3 @@ const VolunteerRoute = ({ children }) => {
 };
 
 export default VolunteerRoute;
-
-// import { Navigate } from "react-router-dom";
-// import useAuth from "../hooks/useAuth";
-// import useRole from "../hooks/useRole";
-// import LoadingSpinner from "../components/Shared/LoadingSpinner";
-
-// const VolunteerRoute = ({ children }) => {
-//   const { user, loading } = useAuth();
-//   const [role, isRoleLoading] = useRole();
-
-//
-//   if (loading || isRoleLoading) return <LoadingSpinner />;
-
-//
-//   if (user && (role === "admin" || role === "volunteer")) {
-//     return children;
-//   }
-
-//
-//   return <Navigate to="/login" replace />;
-// };
-
-// export default VolunteerRoute;
-
-// G-P-T-s

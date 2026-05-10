@@ -15,7 +15,7 @@ const MyDonationRequests = () => {
   const [page, setPage] = useState(1);
   const pageSize = 5;
 
-  // Fetch ALL data from backend
+  // Fetch all data from backend
   useEffect(() => {
     const fetchRequests = async () => {
       try {
