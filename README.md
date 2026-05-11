@@ -3,12 +3,11 @@
 
 Front-end Live Site Link: https://blood-donar-client.web.app
 
-Client Side GitHub Repository Link: 
-Server Side GitHub Repository Link:
+Client Side GitHub Repository Link: https://github.com/Muyedrahman/client
+Server Side GitHub Repository Link: https://github.com/Muyedrahman/server
 
 <!-- Admin -->
-Admin email:  muyed@gmail.com
-Admin password:  muyed@gmail.com
+
 <!-- Volunteer -->
 volunteer : mran1@gmail.com
 volunteerPass : mran1@gmail.com
@@ -16,8 +15,6 @@ volunteerPass : mran1@gmail.com
 donorEmai: abdulla@gmail.com
 DonerPass: abdulla@gmail.com
 
-## 📌 Project Name
-**Blood Donation Application (B12-A11-C0     )**
 
 ##  Purpose
 The Blood Donation Application is a MERN stack based web platform designed to connect blood donors with recipients efficiently.  
@@ -25,57 +22,34 @@ This system helps manage blood donation requests, donor profiles, and role-based
 
 This project is developed as part of **B12 A11 Category-01 Assignment** following all provided guidelines and deployment rules.
 
----
+ 
 
 ##  Live Website
- Front-end Live Link:  
-<!-- https://blood-donation-client-a11.netlify.app/ -->
+ Front-end Live Link:  https://blood-donar-client.web.app
 
----
 
-## 🧑‍🤝 User Roles
+ 
 
-### 👤 Donor (Default)
+###  Donor 
 - Register & login
 - Create blood donation requests
 - View, edit, delete own requests
 - Update profile information
 - Search donors
 
-### 🤝 Volunteer
+###  Volunteer
 - View all blood donation requests
 - Update donation status only
 
-### 🌐 Admin
+###  Admin
 - Full system access
 - Manage users (block/unblock, role change)
 - Manage all donation requests
 - View statistics (users, funds, donation requests)
 
- *Admin role is assigned manually from the database.*
 
----
 
-##  Authentication & Security
-- Email & Password based authentication
-- JWT implemented for protecting private APIs
-- Firebase Authentication
-- Firebase configuration secured using environment variables
-- MongoDB credentials secured using environment variables
 
----
-
-##  Key Features
-
-###  Public Features
-- Home page with banner, featured section & contact form
-- Search donors by blood group, district & upazila
-- View all pending blood donation requests
-
-###  Private Dashboard Features
-- Fully responsive sidebar dashboard
-- Profile management with edit & save toggle
-- Role-based access control
 
 ####  Donor Dashboard
 - Dashboard home with recent 3 donation requests
@@ -99,24 +73,6 @@ This project is developed as part of **B12 A11 Category-01 Assignment** followin
 - Funding history table
 - Total funding displayed on Admin & Volunteer dashboards
 
----
-
-##  UI & UX Highlights
-- Unique, non-generic design (no gobindo UI)
-- Consistent color theme and typography
-- Fully responsive for mobile, tablet & desktop
-- Equal height cards and grid layouts
-- Clean spacing and alignment
-
----
-
-##  Additional Implementations
-- Pagination where required
-- Filtering by status (users & donation requests)
-- Protected private routes (no redirect on reload)
-- Firebase domain authorization configured
-
----
 
 ##  Technology Stack
 
@@ -135,7 +91,7 @@ This project is developed as part of **B12 A11 Category-01 Assignment** followin
 - JWT
 - Stripe
 
----
+
 
 ##  NPM Packages Used
 - react-router-dom
@@ -146,18 +102,4 @@ This project is developed as part of **B12 A11 Category-01 Assignment** followin
 - dotenv
 - cors
 
----
 
-##  Submission 
-
-
-
-
-<!-- **Admin Email:** admin@example.com  
-**Admin Password:** admin123  
-
-**Front-end Live Site:** https://blood-donation-client-a11.netlify.app/  
-**Client Side GitHub Repository:** (add your client repo link)  
-**Server Side GitHub Repository:** (add your server repo link) -->
-
----
