@@ -1,2 +1,145 @@
-@import 'tailwindcss';
+/* @import 'tailwindcss';
 @plugin "daisyui";
+
+@variant dark (&:where(.dark, .dark *)); */
+
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ═══════════════════════════════════════
+   GLOBAL DARK MODE — পুরো site একসাথে
+═══════════════════════════════════════ */
+
+/* Background */
+.dark body,
+.dark main,
+.dark section,
+.dark div:not([class*="bg-red"]):not([class*="bg-primary"]) {
+  --tw-bg-opacity: 1;
+}
+
+/* ── Text ── */
+.dark h1, .dark h2, .dark h3,
+.dark h4, .dark h5, .dark h6 {
+  color: #f1f5f9 !important;
+}
+
+.dark p, .dark span, .dark li,
+.dark label, .dark td, .dark th {
+  color: #cbd5e1 !important;
+}
+
+.dark a:not([class*="text-red"]):not([class*="btn"]) {
+  color: #cbd5e1;
+}
+
+.dark a:not([class*="text-red"]):not([class*="btn"]):hover {
+  color: #f87171;
+}
+
+/* ── Cards & Containers ── */
+.dark .card,
+.dark [class*="rounded"]:not([class*="rounded-full"]) {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+/* ── Inputs, Textarea, Select ── */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #475569 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: #f87171 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2) !important;
+}
+
+/* ── Navbar ── */
+.dark nav,
+.dark [class*="navbar"] {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+}
+
+/* ── Table ── */
+.dark table {
+  background-color: #1e293b;
+  color: #cbd5e1;
+}
+
+.dark thead {
+  background-color: #0f172a !important;
+}
+
+.dark thead th {
+  color: #94a3b8 !important;
+}
+
+.dark tbody tr {
+  border-color: #334155 !important;
+}
+
+.dark tbody tr:hover {
+  background-color: #334155 !important;
+}
+
+/* ── Modal & Dropdown ── */
+.dark [class*="modal"],
+.dark [class*="dropdown"] {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+/* ── Buttons ── */
+.dark button:not([class*="bg-red"]):not([class*="btn-"]):not([class*="bg-primary"]) {
+  color: #f1f5f9;
+}
+
+/* ── Scrollbar ── */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ── DaisyUI Component Override ── */
+.dark .card {
+  background-color: #1e293b !important;
+}
+
+.dark .menu a,
+.dark .menu button {
+  color: #cbd5e1 !important;
+}
+
+.dark .badge {
+  border-color: #475569;
+}
+
+.dark .divider {
+  border-color: #334155;
+}
