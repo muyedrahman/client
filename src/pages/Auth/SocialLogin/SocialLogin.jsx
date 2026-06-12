@@ -43,7 +43,7 @@ const SocialLogin = () => {
         {/* Google */}
         <button
           onClick={handleGoogleSignIn}
-          className="btn bg-white text-black border-[#e5e5e5]"
+          className="btn bg-white text-black border-[#e5e5e5] dark:bg-gray-800 dark:hover:bg-gray-500"
         >
           <svg
             aria-label="Google logo"
