@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logo from "../../../assets/images/logo (1).png";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
@@ -18,8 +18,11 @@ import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const Sidebar = () => {
   const { setLoading } = useAuth();
-  const [requests, setRequests] = useState([]);
+  const [setRequests] = useState([]);
   const [role,isRoleLoading] = useRole()
+  const navigate = useNavigate();
+  const {logOut} = useAuth();
+
   // Fetch pending donation requests
   useEffect(() => {
     const fetchRequests = async () => {
@@ -40,7 +43,17 @@ const Sidebar = () => {
   }, []);
   // console.log(requests);
 
-  const { logOut } = useAuth();
+  // const { logOut } = useAuth();
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
+  };
+
+
   const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
@@ -48,6 +61,8 @@ const Sidebar = () => {
     setActive(!isActive);
   };
 if(isRoleLoading) return <LoadingSpinner></LoadingSpinner>
+
+
   return (
     <>
       {/* dark:bg-gray-900  dark:text-white  */}
@@ -73,7 +88,7 @@ if(isRoleLoading) return <LoadingSpinner></LoadingSpinner>
         className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-gray-100
           dark:bg-gray-900  text-gray-800 dark:text-white
           w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
-            isActive && "-translate-x-full" 
+            isActive && "-translate-x-full"
           }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div className="flex flex-col h-full">
@@ -114,7 +129,7 @@ if(isRoleLoading) return <LoadingSpinner></LoadingSpinner>
               address="/dashboard/profile"
             />
             <button
-              onClick={logOut}
+              onClick={handleLogout}
               className="flex cursor-pointer w-full items-center px-4 py-2 mt-5 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800  hover:text-gray-700 dark:hover:text-white  transition-colors duration-300 transform"
             >
               <GrLogout className="w-5 h-5" />

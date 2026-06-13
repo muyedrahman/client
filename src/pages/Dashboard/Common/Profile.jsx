@@ -4,6 +4,7 @@ import useRole from "../../../hooks/useRole";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import { primaryBtn, secondaryBtn } from "../../../components/Shared/Button/buttonStyles";
 
 const Profile = () => {
   const { user, loading } = useAuth();
@@ -92,8 +93,8 @@ const Profile = () => {
     "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
   return (
-    <div className="p-6 bg-red-50 min-h-screen">
-      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden">
+    <div className="p-6 bg-red-50 min-h-screen dark:bg-gray-950 transition-colors duration-300">
+      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-md overflow-hidden">
         <div className="h-32 bg-gradient-to-r from-red-500 to-red-700" />
 
         <div className="flex flex-col items-center -mt-12 px-6 pb-6">
@@ -111,7 +112,8 @@ const Profile = () => {
             {!isEditing ? (
               <button
                 onClick={() => setIsEditing(true)}
-                className="bg-red-600 text-white px-5 py-2 rounded-lg"
+                // className="bg-red-600 text-white px-5 py-2 rounded-lg"
+                className={secondaryBtn}
               >
                 Edit
               </button>
@@ -119,13 +121,15 @@ const Profile = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => setIsEditing(false)}
-                  className="border px-5 py-2 rounded-lg"
+                  // className="border px-5 py-2 rounded-lg"
+                  className={primaryBtn}
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleUpdate}
-                  className="bg-red-600 text-white px-5 py-2 rounded-lg"
+                  // className="bg-red-600 text-white px-5 py-2 rounded-lg"
+                  className={secondaryBtn}
                 >
                   Save
                 </button>
@@ -167,7 +171,7 @@ const Profile = () => {
               ))}
             </select>
 
-            {/* district */} 
+            {/* district */}
             <select
               onChange={handleDistrictChange}
               disabled={!isEditing}

@@ -1,5 +1,171 @@
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+
+// const SearchPage = () => {
+//   const [bloodGroup, setBloodGroup] = useState("");
+//   const [district, setDistrict] = useState("");
+//   const [upazila, setUpazila] = useState("");
+
+//   const [results, setResults] = useState([]);
+//   const [districts, setDistricts] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+
+//   // Load districts
+//   useEffect(() => {
+//     fetch("/Districts.json")
+//       .then((res) => res.json())
+//       .then((data) => setDistricts(data))
+//       .catch((err) => console.error("District load error:", err));
+//   }, []);
+
+//   // Search handler
+//   const handleSearch = async (e) => {
+//     e.preventDefault();
+
+//     setLoading(true);
+//     setResults([]);
+
+//     try {
+//       const res = await axios.get(
+//         `${import.meta.env.VITE_API_URL}/donation-requests`,
+//         {
+//           params: {
+//             blood_group: bloodGroup || undefined,
+//             district: district || undefined,
+//             upazila: upazila || undefined,
+//             status: "pending",
+//           },
+//         },
+//       );
+
+//       setResults(res.data || []);
+//     } catch (error) {
+//       console.error("Search error:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-red-50 py-12 px-4">
+//       <div className="max-w-5xl mx-auto">
+//         <h2 className="text-4xl font-bold text-center text-red-700 mb-8">
+//           Find Blood Donors
+//         </h2>
+
+//         {/* SEARCH FORM */}
+//         <form
+//           onSubmit={handleSearch}
+//           className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8"
+//         >
+//           {/* Blood Group */}
+//           <select
+//             value={bloodGroup}
+//             onChange={(e) => setBloodGroup(e.target.value)}
+//             className="p-3 rounded-xl border"
+//           >
+//             <option value="">Blood Group</option>
+//             {bloodGroups.map((bg) => (
+//               <option key={bg} value={bg}>
+//                 {bg}
+//               </option>
+//             ))}
+//           </select>
+
+//           {/* District */}
+//           <select
+//             value={district}
+//             onChange={(e) => {
+//               setDistrict(e.target.value);
+//               setUpazila("");
+//             }}
+//             className="p-3 rounded-xl border"
+//           >
+//             <option value="">District</option>
+//             {districts.map((d) => (
+//               <option key={d.id} value={d.name}>
+//                 {d.name}
+//               </option>
+//             ))}
+//           </select>
+
+//           {/* Upazila */}
+//           <select
+//             value={upazila}
+//             onChange={(e) => setUpazila(e.target.value)}
+//             className="p-3 rounded-xl border"
+//             disabled={!district}
+//           >
+//             <option value="">Upazila</option>
+//             {districts
+//               .find((d) => d.name === district)
+//               ?.upazilas?.map((u) => (
+//                 <option key={u.id} value={u.name}>
+//                   {u.name}
+//                 </option>
+//               ))}
+//           </select>
+
+//           {/* Button */}
+//           <button className="bg-red-600 text-white rounded-xl">Search</button>
+//         </form>
+
+//         {/* LOADING */}
+//         {loading && (
+//           <p className="text-center text-gray-500">Searching donors...</p>
+//         )}
+
+//         {/* EMPTY STATE */}
+//         {!loading && results.length === 0 && (
+//           <p className="text-center text-gray-500">
+//             No donors found. Try different filters.
+//           </p>
+//         )}
+
+//         {/* RESULTS */}
+//         <div className="grid md:grid-cols-3 gap-5">
+//           {results.map((req) => (
+//             <div
+//               key={req._id}
+//               className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition"
+//             >
+//               <h2 className="text-red-600 font-bold text-lg">
+//                 {req.requesterName || "Unknown"}
+//               </h2>
+
+//               <p>
+//                 <span className="font-semibold">Blood:</span> {req.blood_group}
+//               </p>
+
+//               <p>
+//                 <span className="font-semibold">District:</span>
+//                 {req.recipientDistrict}
+//               </p>
+
+//               <p>
+//                 <span className="font-semibold">Upazila:</span>
+//                 {req.recipientUpazila}
+//               </p>
+
+//               <p className="text-sm text-gray-500 mt-2">Status: {req.status}</p>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SearchPage;
+
+
+// 3
+
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { primaryBtn } from "../Button/buttonStyles";
 
 const SearchPage = () => {
   const [bloodGroup, setBloodGroup] = useState("");
@@ -49,9 +215,10 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-red-50 py-12 px-4">
+    /* মেইন কন্টেইনার ডার্ক মোড ফিক্স */
+    <div className="min-h-screen bg-gray-50 dark:!bg-gray-950 py-12 px-4 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-red-700 mb-8">
+        <h2 className="text-4xl font-bold text-center text-red-600 dark:text-red-500 mb-8">
           Find Blood Donors
         </h2>
 
@@ -64,11 +231,13 @@ const SearchPage = () => {
           <select
             value={bloodGroup}
             onChange={(e) => setBloodGroup(e.target.value)}
-            className="p-3 rounded-xl border"
+            className="p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
           >
-            <option value="">Blood Group</option>
+            <option value="" className="dark:bg-gray-800">
+              Blood Group
+            </option>
             {bloodGroups.map((bg) => (
-              <option key={bg} value={bg}>
+              <option key={bg} value={bg} className="dark:bg-gray-800">
                 {bg}
               </option>
             ))}
@@ -81,11 +250,13 @@ const SearchPage = () => {
               setDistrict(e.target.value);
               setUpazila("");
             }}
-            className="p-3 rounded-xl border"
+            className="p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
           >
-            <option value="">District</option>
+            <option value="" className="dark:bg-gray-800">
+              District
+            </option>
             {districts.map((d) => (
-              <option key={d.id} value={d.name}>
+              <option key={d.id} value={d.name} className="dark:bg-gray-800">
                 {d.name}
               </option>
             ))}
@@ -95,31 +266,41 @@ const SearchPage = () => {
           <select
             value={upazila}
             onChange={(e) => setUpazila(e.target.value)}
-            className="p-3 rounded-xl border"
+            className="p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors disabled:opacity-50"
             disabled={!district}
           >
-            <option value="">Upazila</option>
+            <option value="" className="dark:bg-gray-800">
+              Upazila
+            </option>
             {districts
               .find((d) => d.name === district)
               ?.upazilas?.map((u) => (
-                <option key={u.id} value={u.name}>
+                <option key={u.id} value={u.name} className="dark:bg-gray-800">
                   {u.name}
                 </option>
               ))}
           </select>
 
           {/* Button */}
-          <button className="bg-red-600 text-white rounded-xl">Search</button>
+          <button
+            type="submit"
+            className={primaryBtn}
+            // className="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl py-3 transition shadow-sm"
+          >
+            Search
+          </button>
         </form>
 
         {/* LOADING */}
         {loading && (
-          <p className="text-center text-gray-500">Searching donors...</p>
+          <p className="text-center text-gray-500 dark:text-gray-400 font-medium animate-pulse">
+            Searching donors...
+          </p>
         )}
 
         {/* EMPTY STATE */}
         {!loading && results.length === 0 && (
-          <p className="text-center text-gray-500">
+          <p className="text-center text-gray-500 dark:text-gray-400 py-10 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm">
             No donors found. Try different filters.
           </p>
         )}
@@ -129,27 +310,42 @@ const SearchPage = () => {
           {results.map((req) => (
             <div
               key={req._id}
-              className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition"
+              className="bg-white dark:bg-gray-900 p-5 rounded-2xl shadow border border-gray-100 dark:border-gray-800/60 hover:shadow-lg dark:hover:border-gray-700 transition duration-300"
             >
-              <h2 className="text-red-600 font-bold text-lg">
-                {req.requesterName || "Unknown"}
-              </h2>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-red-600 dark:text-red-400 font-bold text-lg">
+                  {req.requesterName || "Unknown"}
+                </h3>
+                <span className="bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 text-xs font-bold px-2.5 py-1 rounded-full border border-red-100 dark:border-red-900/30">
+                  {req.blood_group || req.bloodGroup}
+                </span>
+              </div>
 
-              <p>
-                <span className="font-semibold">Blood:</span> {req.blood_group}
-              </p>
+              <div className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
+                <p>
+                  <span className="font-semibold text-gray-800 dark:text-gray-400">
+                    District:
+                  </span>{" "}
+                  {req.recipientDistrict || req.district}
+                </p>
 
-              <p>
-                <span className="font-semibold">District:</span>
-                {req.recipientDistrict}
-              </p>
+                <p>
+                  <span className="font-semibold text-gray-800 dark:text-gray-400">
+                    Upazila:
+                  </span>{" "}
+                  {req.recipientUpazila || req.upazila}
+                </p>
+              </div>
 
-              <p>
-                <span className="font-semibold">Upazila:</span>
-                {req.recipientUpazila}
-              </p>
+              <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                <span className="text-xs font-medium capitalize px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-100 dark:border-amber-900/30">
+                  {req.status}
+                </span>
 
-              <p className="text-sm text-gray-500 mt-2">Status: {req.status}</p>
+                <button className="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline">
+                  View Details -
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -160,6 +356,9 @@ const SearchPage = () => {
 
 export default SearchPage;
 
+
+
+// 1
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 

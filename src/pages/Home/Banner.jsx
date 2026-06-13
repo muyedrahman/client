@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { primaryBtn, secondaryBtn } from "../../components/Shared/Button/buttonStyles";
 
 const Banner = () => {
   return (
@@ -20,8 +21,9 @@ const Banner = () => {
           {/* Join as Donor */}
           <Link
             to="/signup"
-            className="bg-red-600 text-white font-semibold px-8 py-3 rounded-full shadow 
-            transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-700"
+            className={primaryBtn}
+            // className="bg-red-600 text-white font-semibold px-8 py-3 rounded-full shadow
+            // transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-700"
           >
             Join as a Donor
           </Link>
@@ -29,8 +31,9 @@ const Banner = () => {
           {/* Search Donors   */}
           <Link
             to="/search-page"
-            className="relative border border-red-600 text-red-600 font-semibold px-8 py-3 rounded-full 
-            overflow-hidden transition-all duration-300 transform hover:scale-105"
+            className={secondaryBtn}
+            // className="relative border border-red-600 text-red-600 font-semibold px-8 py-3 rounded-full
+            // overflow-hidden transition-all duration-300 transform hover:scale-105"
           >
             <span className="relative z-10">Search Donors</span>
 
