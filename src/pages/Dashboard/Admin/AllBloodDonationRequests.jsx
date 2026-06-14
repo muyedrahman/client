@@ -571,9 +571,9 @@ const AllBloodDonationRequests = () => {
 
           <button
             onClick={
-              () => setCurrentPage((p) => p - 1) /* মিস্টেক ফিক্স: p + 1 হবে */
+              () => setCurrentPage((p) => p - 1)  
             }
-            onClick={() => setCurrentPage((p) => p + 1)}
+            // onClick={() => setCurrentPage((p) => p + 1)}
             disabled={currentPage === totalPages}
             className={primaryBtn}
           >
