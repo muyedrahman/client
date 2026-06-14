@@ -1,302 +1,238 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router"; 
 import axios from "axios";
-import useAuth from "../../../hooks/useAuth";
-import toast from "react-hot-toast";
+import {
+  LuArrowLeft,
+  LuCalendar,
+  LuClock,
+  LuMapPin,
+  LuPhone,
+  LuHeart,
+  LuHospital,
+  LuUser,
+  LuFileText,
+} from "react-icons/lu";
+import Error from "../../../assets/images/error.png"
+import { primaryBtn } from "../../Shared/Button/buttonStyles";
 
 const DonationRequestDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams(); 
   const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useAuth();
-
-  const mode = location.state?.mode || "view"; 
 
   const [request, setRequest] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [updating, setUpdating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch single donation request
   useEffect(() => {
-    const fetchRequest = async () => {
+    const fetchDetails = async () => {
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/donation-requests/${id}`
+        setIsLoading(true);
+        setError(null);
+
+       
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/donation-requests/${id}`,
         );
-        setRequest(res.data);
+        setRequest(response.data);
       } catch (err) {
-        console.error(err);
-        toast.error("Failed to load donation request");
+        console.error("Error fetching donation details:", err);
+        setError(
+          " 'Information  for this blood donation request was not found. It may have been deleted or completed.' ",
+        );
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
-    fetchRequest();
+
+    if (id) fetchDetails();
   }, [id]);
 
-  //  Donate Confirm
-  const handleDonateConfirm = async () => {
-    try {
-      const token = await user.getIdToken();
-      const res = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/donation-requests/${id}/donate`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (res.data.success) {
-        setRequest((prev) => ({
-          ...prev,
-          status: "inprogress",
-          donorName: user?.displayName,
-          donorEmail: user?.email,
-        }));
-        setOpen(false);
-        toast.success("Donation request accepted!");
-        navigate(-1);
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "Something went wrong");
-    }
-  };
-
-  //  Update request  
- const handleUpdate = async () => {
-  setUpdating(true);
-  try {
-    const { _id, ...updateData } = request; 
-
-    await axios.patch(
-      `${import.meta.env.VITE_API_URL}/donation-requests/${id}`,
-      updateData
-    );
-
-    toast.success("Donation request updated successfully!");
-    navigate(-1);
-  } catch (err) {
-    console.error(err);
-    toast.error(err.response?.data?.message || "Update failed!");
-  } finally {
-    setUpdating(false);
-  }
-};
-
-
-  if (loading) return <p className="text-center mt-20">Loading...</p>;
-  if (!request) return <p className="text-center mt-20">Request not found</p>;
-
-  return (
-    <div className="min-h-screen bg-red-50 px-4 py-12 flex justify-center">
-      <div className="max-w-3xl w-full bg-white p-8 rounded-3xl shadow-xl">
-        <h2 className="text-3xl font-bold text-red-700 mb-6">
-          {mode === "edit" ? "Edit Donation Request" : "Donation Request Details"}
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-gray-800">
-          {/* Requester Name */}
-          <Field
-            label="Requester Name"
-            value={request.requesterName}
-            editable={mode === "edit"}
-            onChange={(val) => setRequest((prev) => ({ ...prev, requesterName: val }))}
-          />
-
-          {/* Blood Group */}
-          <Field
-            label="Blood Group"
-            value={request.bloodGroup}
-            editable={mode === "edit"}
-            onChange={(val) => setRequest((prev) => ({ ...prev, bloodGroup: val }))}
-          />
-
-          {/* Hospital Name */}
-          <Field
-            label="Hospital"
-            value={request.hospitalName}
-            editable={mode === "edit"}
-            onChange={(val) => setRequest((prev) => ({ ...prev, hospitalName: val }))}
-          />
-
-          {/* District */}
-          <Field label="District" value={request.recipientDistrict} editable={false} />
-
-          {/* Upazila */}
-          <Field label="Upazila" value={request?.recipientUpazila} editable={false} />
-
-          {/* Donation Date */}
-          <Field
-            label="Donation Date"
-            value={request.donationDate}
-            editable={mode === "edit"}
-            type="date"
-            onChange={(val) => setRequest((prev) => ({ ...prev, donationDate: val }))}
-          />
-
-          {/* Donation Time */}
-          <Field
-            label="Donation Time"
-            value={request.donationTime}
-            editable={mode === "edit"}
-            type="time"
-            onChange={(val) => setRequest((prev) => ({ ...prev, donationTime: val }))}
-          />
-
-          {/* Full Address */}
-          <Field
-            label="Full Address"
-            value={request.fullAddress}
-            editable={mode === "edit"}
-            textarea
-            onChange={(val) => setRequest((prev) => ({ ...prev, fullAddress: val }))}
-            fullWidth
-          />
-
-          {/* Message */}
-          <Field
-            label="Message"
-            value={request.requestMessage}
-            editable={mode === "edit"}
-            textarea
-            onChange={(val) => setRequest((prev) => ({ ...prev, requestMessage: val }))}
-            fullWidth
-          />
-
-          {/* Status */}
-          {mode === "edit" && (
-            <div className={mode === "edit" ? "md:col-span-2" : ""}>
-              <p className="font-semibold text-gray-700 mb-1">Status</p>
-              <select
-                value={request.status}
-                onChange={(e) =>
-                  setRequest((prev) => ({ ...prev, status: e.target.value }))
-                }
-                className="select select-bordered w-full"
-              >
-                <option value="pending">Pending</option>
-                <option value="inprogress">In Progress</option>
-                <option value="done">Done</option>
-                <option value="canceled">Canceled</option>
-              </select>
-            </div>
-          )}
-
-          {/* Donor Info */}
-          {request.status === "inprogress" && (
-            <div className="md:col-span-2 bg-green-50 p-4 rounded-xl">
-              <p className="font-semibold text-green-700 mb-1">Donor Information</p>
-              <p>Name: {request.donorName || user?.displayName}</p>
-              <p>Email: {request.donorEmail || user?.email}</p>
-            </div>
-          )}
-        </div>
-
-        {/* Buttons */}
-        <div className="text-center mt-10 flex flex-col md:flex-row justify-center gap-4">
-          {/* Donate button */}
-          {request.status === "pending" && user && mode === "view" && (
-            <button
-              onClick={() => setOpen(true)}
-              className="bg-red-600 hover:bg-red-700 transition text-white px-10 py-3 rounded-full font-semibold"
-            >
-              Donate Now
-            </button>
-          )}
-
-          {/* Update button */}
-          {mode === "edit" && (
-            <button
-              onClick={handleUpdate}
-              className={`bg-red-600 hover:bg-red-700 text-white px-10 py-3 rounded-full font-semibold ${
-                updating ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={updating}
-            >
-              {updating ? "Updating..." : "Update Request"}
-            </button>
-          )}
-
-          {/* Back button */}
-          <button
-            onClick={() => navigate(-1)}
-            className="bg-gray-300 hover:bg-gray-400 px-10 py-3 rounded-full font-semibold"
-          >
-            Back
-          </button>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <div className="relative w-12 h-12">
+          <div className="w-12 h-12 rounded-full border-4 border-red-200 dark:border-red-950 border-t-red-600 animate-spin"></div>
         </div>
       </div>
+    );
+  }
 
-      {/* CONFIRM MODAL */}
-      {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-40">
-          <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
-            <h2 className="text-2xl font-bold text-red-700 mb-6 text-center">
-              Confirm Donation
-            </h2>
 
-            <div className="space-y-4">
-              <Input label="Donor Name" value={user?.displayName} />
-              <Input label="Donor Email" value={user?.email} />
+  if (error || !request) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-950 px-4 text-center">
+        <div className="text-red-500 text-5xl mb-4">
+       
+          <img src={Error} alt="Err" />
+        </div>
 
-              <button
-                onClick={handleDonateConfirm}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-semibold"
-              >
-                Confirm & Proceed
-              </button>
+        <p className="text-gray-800 dark:text-gray-200 font-bold text-lg max-w-md">
+          {error || "কিছু একটা ভুল হয়েছে!"}
+        </p>
+        <button
+          onClick={() => navigate(-1)}
+          className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-xl font-bold text-sm transition"
+        >
+          <LuArrowLeft /> 
+        </button>
+      </div>
+    );
+  }
 
-              <button
-                onClick={() => setOpen(false)}
-                className="w-full text-gray-600 mt-2"
-              >
-                Cancel
-              </button>
+  
+  const bloodGroup = request.bloodGroup || request.blood_group || "N/A";
+  const district = request.recipientDistrict || request.district || "N/A";
+  const upazila = request.recipientUpazila || request.upazila || "N/A";
+  const phoneNumber = request.phoneNumber || request.phone || "";
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-10 px-4 transition-colors duration-300">
+      <div className="max-w-3xl mx-auto">
+   
+        <button
+          onClick={() => navigate(-1)}
+          className={`${primaryBtn} mb-6 inline-flex items-center gap-2`}
+        >
+          <LuArrowLeft className="text-base shrink-0" />
+          <span>Back to List</span>
+        </button>
+
+       
+        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800/80 overflow-hidden">
+     
+          <div className="bg-gradient-to-br from-red-600 to-red-700 p-6 sm:p-8 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <span className="bg-white/20 text-white text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full border border-white/10 inline-block">
+                {request.status || "Pending"} Emergency Request
+              </span>
+              <h1 className="text-2xl sm:text-3xl font-black mt-2 tracking-tight flex items-center gap-2">
+                <LuUser className="shrink-0 opacity-80" />{" "}
+                {request.requesterName || "Anonymous Patient"}
+              </h1>
+            </div>
+
+      
+            <div className="bg-white dark:bg-gray-950 text-red-600 dark:text-red-500 text-3xl font-black px-6 py-3 rounded-2xl shadow-lg shrink-0 flex items-center justify-center min-w-[85px] border border-red-50 dark:border-gray-800">
+              {bloodGroup}
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8 space-y-8">
+     
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    
+              <div className="flex gap-4 items-start">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-950 text-red-500 border border-gray-100 dark:border-gray-800/60">
+                  <LuHospital className="text-xl" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                    Hospital Name
+                  </h4>
+                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-0.5 truncate">
+                    {request.hospitalName || "Not Specified"}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 break-words">
+                    {request.fullAddress ||
+                      request.address ||
+                      "No full address added"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-950 text-blue-500 border border-gray-100 dark:border-gray-800/60">
+                  <LuMapPin className="text-xl" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                    Location Area
+                  </h4>
+                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-0.5">
+                    {upazila}, {district}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                    Bangladesh
+                  </p>
+                </div>
+              </div>
+
+              {/* DAte*/}
+              <div className="flex gap-4 items-start">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-950 text-green-500 border border-gray-100 dark:border-gray-800/60">
+                  <LuCalendar className="text-xl" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                    Donation Date
+                  </h4>
+                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-0.5">
+                    {request.donationDate || "Urgent/Today"}
+                  </p>
+                </div>
+              </div>
+
+         
+              <div className="flex gap-4 items-start">
+                <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-950 text-amber-500 border border-gray-100 dark:border-gray-800/60">
+                  <LuClock className="text-xl" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                    Required Time
+                  </h4>
+                  <p className="text-gray-900 dark:text-gray-100 font-bold mt-0.5">
+                    {request.donationTime || "ASAP"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-gray-100 dark:border-gray-800" />
+
+          
+            <div>
+              <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                <LuFileText className="text-red-500" /> Medical Reason / Message
+              </h4>
+              <div className="bg-gray-50 dark:bg-gray-950 p-4 rounded-2xl border border-gray-100 dark:border-gray-800/60 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                {request.medicalReason ||
+                  request.reason ||
+                  "No additional message was provided. For details, please call the number given below directly."}
+              </div>
+            </div>
+
+            
+            <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row gap-4 items-center justify-between">
+              <div>
+                <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase block">
+                  Current Status
+                </span>
+                <span className="inline-flex items-center text-xs font-extrabold px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-400 border border-amber-100 dark:border-amber-900/20 uppercase mt-1.5">
+                  {request.status || "pending"}
+                </span>
+              </div>
+
+             
+              {phoneNumber ? (
+                <a
+                  href={`tel:${phoneNumber}`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-red-600 hover:bg-red-700 active:scale-[0.98] text-white font-bold rounded-xl shadow-lg shadow-red-600/10 transition duration-150 text-sm"
+                >
+                  <LuPhone className="text-base shrink-0" />
+                  <span>Call Requester ({phoneNumber})</span>
+                </a>
+              ) : (
+                <span className="text-sm text-gray-400 italic">
+                  No phone number provided
+                </span>
+              )}
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
-
-/*  Reusable Components */
-
-const Field = ({ label, value, editable, onChange, textarea, type, fullWidth }) => {
-  return (
-    <div className={fullWidth ? "md:col-span-2" : ""}>
-      <p className="font-semibold text-gray-700 mb-1">{label}</p>
-      {editable ? (
-        textarea ? (
-          <textarea
-            value={value || ""}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full border rounded-xl px-4 py-3"
-          />
-        ) : (
-          <input
-            type={type || "text"}
-            value={value || ""}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full border rounded-xl px-4 py-3"
-          />
-        )
-      ) : (
-        <p className="bg-gray-100 p-3 rounded-xl mt-1">{value}</p>
-      )}
-    </div>
-  );
-};
-
-const Input = ({ label, value }) => (
-  <div>
-    <p className="font-semibold text-gray-700 mb-1">{label}</p>
-    <input
-      readOnly
-      value={value || ""}
-      className="w-full border rounded-xl px-4 py-3 bg-gray-100"
-    />
-  </div>
-);
 
 export default DonationRequestDetails;

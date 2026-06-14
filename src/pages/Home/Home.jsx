@@ -5,6 +5,8 @@ import ContactUs from './ContactUs '
 import FeaturedSection from './FeaturedSection '
 import HowItWorks from './HowItWorks';
 import StatsSection from './StatsSection';
+import TestimonialsSection from './TestimonialsSection';
+import CTASection from "./CTASection";
 
 const Home = () => {
   return (
@@ -14,9 +16,9 @@ const Home = () => {
       <HowItWorks/>  {/* 3. How It Works */}
       <BloodGroupSection /> {/* 4. Blood Groups */}
       <FeaturedSection></FeaturedSection> {/* 5. Features */}
-      {/* 6. Testimonials */}
+      <TestimonialsSection /> {/* 6. Testimonials */}
       <ContactUs></ContactUs> {/* 7. Contact */}
-      {/* 8. Call to Action */}
+      <CTASection /> {/* 8. Call to Action */}
     </div>
   );
 }

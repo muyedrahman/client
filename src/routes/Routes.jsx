@@ -15,7 +15,9 @@ import { createBrowserRouter } from "react-router";
 import Blog from "../components/Shared/MenuLinks/Blog";
 import MyDonationRequest from "../pages/Dashboard/Customer/MyDonationRequest";
 import SearchPage from "../components/Shared/Navbar/SearchPage";
+
 import DonationRequestDetails from "../components/Dashboard/DonationDetails/DonationRequestDetails";
+
 import PaymentSuccess from "../components/Dashboard/Payment/PaymentSuccess";
 import DetailsJust from "../components/Dashboard/DonationDetails/DetailsJust";
 // import AllUsers from "../pages/Dashboard/Admin/AllUsers";
@@ -136,7 +138,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      //   Admin + Volunteer 
+      //   Admin + Volunteer
       {
         path: "all-blood-donation-request",
         element: (
@@ -148,11 +150,7 @@ export const router = createBrowserRouter([
 
       {
         path: "all-users/donation-details/:id",
-        element: (
-          <PrivateRoute>
-            <DonationRequestDetails />
-          </PrivateRoute>
-        ),
+        element: <DonationRequestDetails />,
       },
       {
         path: "all-users/details-just/:id",
@@ -208,8 +206,6 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
-      
     ],
   },
 ]);
