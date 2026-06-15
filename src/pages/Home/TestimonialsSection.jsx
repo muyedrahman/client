@@ -1,5 +1,5 @@
 import React from "react";
-/* মডার্ন কোটেশন আইকন */
+ 
 import { FaQuoteLeft } from "react-icons/fa";
 
 const testimonials = [
@@ -66,10 +66,10 @@ const TestimonialsSection = () => {
                 <img
                   src={item.avatar}
                   alt={item.name}
-                  loading="lazy" // প্রোডাকশন পারফরম্যান্স অপ্টিমাইজেশনের জন্য লেজি লোডিং মাস্ট
+                  loading="lazy"  
                   className="w-11 h-11 rounded-full object-cover border-2 border-white dark:border-gray-800 shadow-sm"
                   onError={(e) => {
-                    // ইমেজ লোড হতে ফেইল করলে একটি সুন্দর জেনেরিক টেক্সট প্লেসহোল্ডার ব্যাকআপ
+                   
                     e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=fecaca&color=b91c1c`;
                   }}
                 />

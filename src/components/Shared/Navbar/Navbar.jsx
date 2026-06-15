@@ -10,11 +10,11 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [isOpen, setIsOpen] = useState(false); // mobile menu
-  const [dropOpen, setDropOpen] = useState(false); // profile dropdown
+  const [isOpen, setIsOpen] = useState(false);  
+  const [dropOpen, setDropOpen] = useState(false);  
   const dropRef = useRef(null);
 
-  // outside click — dropdown বন্ধ হবে
+  // outside click — dropdown  
   useEffect(() => {
     const handleClick = (e) => {
       if (dropRef.current && !dropRef.current.contains(e.target)) {
@@ -25,7 +25,7 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // route change হলে mobile menu বন্ধ
+   
   const closeAll = () => {
     setIsOpen(false);
     setDropOpen(false);
@@ -44,7 +44,7 @@ const Navbar = () => {
     >
       <Container>
         <div className="flex items-center justify-between h-16">
-          {/* ── LEFT: Logo ── */}
+           
           <Link
             to="/"
             onClick={closeAll}
@@ -57,7 +57,7 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* ── CENTER: Desktop Links ── */}
+          {/*  CENTER: Desktop Links  */}
           <nav className="hidden md:flex items-center gap-7">
             <NavLink to="/" end className={navLinkClass}>
               Home
@@ -76,12 +76,12 @@ const Navbar = () => {
             </NavLink>
           </nav>
 
-          {/* ── RIGHT: Theme + Profile/Auth ── */}
+          {/* RIGHT: Theme + Profile/Auth */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle — সবসময় দেখাবে */}
+           
             <ThemeToggle />
 
-            {/* ── LOGGED IN: Profile Dropdown ── */}
+            {/*  LOGGED IN: Profile Dropdown   */}
             {user ? (
               <div className="relative hidden md:block" ref={dropRef}>
                 <button
@@ -140,7 +140,7 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              /* ── LOGGED OUT: Login + Signup (Desktop) ── */
+              /* LOGGED OUT: Login + Signup   */
               <div className="hidden md:flex items-center gap-2">
                 <Link
                   to="/login"
@@ -162,7 +162,7 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* ── HAMBURGER: Mobile Only ── */}
+            {/*   HAMBURGER: Mobile Only   */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300
@@ -179,9 +179,7 @@ const Navbar = () => {
         </div>
       </Container>
 
-      {/* ══════════════════════════════
-          MOBILE MENU (dropdown panel)
-      ══════════════════════════════ */}
+      {/*  MOBILE MENU (dropdown panel) */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out
                     bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800
@@ -189,7 +187,7 @@ const Navbar = () => {
       >
         <Container>
           <nav className="py-3 flex flex-col gap-1">
-            {/* User info (logged in) */}
+           
             {user && (
               <div
                 className="flex items-center gap-3 px-3 py-3 mb-1 

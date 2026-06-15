@@ -6,7 +6,7 @@ import { primaryBtn, secondaryBtn } from "../../components/Shared/Button/buttonS
 
 const CTASection = () => {
   return (
-    /* লাইট মোডে রেড থেকে গ্রে-৮০০ এবং ডার্ক মোডে রেড থেকে গ্রে-৯৫৫ গ্রেডিয়েন্ট করা হয়েছে যা ফুটারের সাথে মিলবে */
+   
     <section className="relative overflow-hidden py-24 bg-gradient-to-b from-red-600 to-gray-800 dark:from-red-950 dark:to-gray-950 transition-colors duration-500">
       {/* Background blur decorative shapes */}
       <div className="absolute top-12 left-1/4 w-72 h-72 bg-red-500/10 dark:bg-red-500/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -29,7 +29,6 @@ const CTASection = () => {
           someone's reason to live.
         </p>
 
-        {/* Interactive Action Buttons */}
        
         {/* 2 */}
         {/* Interactive Action Buttons */}
@@ -37,7 +36,7 @@ const CTASection = () => {
           {/* Primary Action */}
           <Link
             to="/signup"
-            /* `${primaryBtn} ...` ব্যবহার করে গ্লোবাল স্টাইলের সাথে ফ্লেক্সবক্স ক্লাস যুক্ত করা হয়েছে */
+             
             className={`${primaryBtn} w-full sm:w-auto inline-flex items-center justify-center gap-2`}
           >
             <LuUserPlus className="text-lg shrink-0" />
@@ -47,7 +46,7 @@ const CTASection = () => {
           {/* Secondary Action */}
           <Link
             to="/search-page"
-            /* ঠিক একইভাবে এখানেও পাশাপাশি আনার লজিক অ্যাপ্লাই করা হয়েছে */
+           
             className={`${secondaryBtn} w-full sm:w-auto inline-flex items-center justify-center gap-2`}
           >
             <LuSearch className="text-lg shrink-0" />

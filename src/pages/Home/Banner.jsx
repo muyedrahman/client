@@ -22,8 +22,7 @@ const Banner = () => {
           <Link
             to="/signup"
             className={primaryBtn}
-            // className="bg-red-600 text-white font-semibold px-8 py-3 rounded-full shadow
-            // transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-700"
+             
           >
             Join as a Donor
           </Link>
@@ -32,8 +31,7 @@ const Banner = () => {
           <Link
             to="/search-page"
             className={secondaryBtn}
-            // className="relative border border-red-600 text-red-600 font-semibold px-8 py-3 rounded-full
-            // overflow-hidden transition-all duration-300 transform hover:scale-105"
+           
           >
             <span className="relative z-10">Search Donors</span>
 

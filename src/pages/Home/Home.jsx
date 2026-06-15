@@ -11,14 +11,14 @@ import CTASection from "./CTASection";
 const Home = () => {
   return (
     <div>
-      <Banner></Banner> {/* 1. Hero */}
-       <StatsSection />    {/* 2. Dynamic Stats */}
-      <HowItWorks/>  {/* 3. How It Works */}
-      <BloodGroupSection /> {/* 4. Blood Groups */}
-      <FeaturedSection></FeaturedSection> {/* 5. Features */}
-      <TestimonialsSection /> {/* 6. Testimonials */}
-      <ContactUs></ContactUs> {/* 7. Contact */}
-      <CTASection /> {/* 8. Call to Action */}
+      <Banner></Banner>  
+       <StatsSection />     
+      <HowItWorks/>   
+      <BloodGroupSection />  
+      <FeaturedSection></FeaturedSection> 
+      <TestimonialsSection />  
+      <ContactUs></ContactUs>  
+      <CTASection />  
     </div>
   );
 }

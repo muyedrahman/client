@@ -660,7 +660,7 @@ const SignUp = () => {
               )}
           </div>
 
-          {/* ── Submit ── */}
+          {/*   Submit */}
           <button
             type="submit"
             disabled={submitting}
@@ -681,7 +681,7 @@ const SignUp = () => {
                 Creating Account...
               </>
             ) : (
-              // "Create Account"
+              
               "Sign Up"
             )}
           </button>

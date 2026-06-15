@@ -1,9 +1,8 @@
 import React from "react";
-/* Lucide Icons মডার্ন UI-তে অত্যন্ত পপুলার এবং লাইটওয়েট */
+ 
 import { LuUserPlus, LuSearch, LuPhoneCall } from "react-icons/lu";
 import { BiDonateBlood } from "react-icons/bi";
-
-// ডেটা অবজেক্টটিকে কম্পোনেন্টের বাইরে রাখা হয়েছে যাতে রি-রেন্ডারিং এ মেমোরি অপ্টিমাইজড থাকে
+ 
 const steps = [
   {
     step: "01",
@@ -46,7 +45,7 @@ const HowItWorks = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((item, i) => {
-            const Icon = item.icon; // আইকনকে কম্পোনেন্ট হিসেবে রেন্ডার করার জন্য ভেরিয়েবলে অ্যাসাইন
+            const Icon = item.icon;  
             return (
               <div
                 key={i}
