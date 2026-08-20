@@ -37,15 +37,7 @@ const Banner = () => {
             ></span>
           </Link>
 {/* xxxxxxxxxxxx */}
-          <Link to="/search-page" className={secondaryBtn}>
-            <span className="relative z-10">Search Donors</span>
-
-            {/* Slide Animation BG */}
-            <span
-              className="absolute inset-0 bg-red-100 translate-x-full hover:translate-x-0 
-              transition-transform duration-300 ease-out"
-            ></span>
-          </Link>
+        
         </div>
       </div>
     </div>
