@@ -1,5 +1,8 @@
 import { Link } from "react-router";
-import { primaryBtn, secondaryBtn } from "../../components/Shared/Button/buttonStyles";
+import {
+  primaryBtn,
+  secondaryBtn,
+} from "../../components/Shared/Button/buttonStyles";
 
 const Banner = () => {
   return (
@@ -19,20 +22,22 @@ const Banner = () => {
         {/* Buttons */}
         <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
           {/* Join as Donor */}
-          <Link
-            to="/signup"
-            className={primaryBtn}
-             
-          >
+          <Link to="/signup" className={primaryBtn}>
             Join as a Donor
           </Link>
 
           {/* Search Donors   */}
-          <Link
-            to="/search-page"
-            className={secondaryBtn}
-           
-          >
+          <Link to="/search-page" className={secondaryBtn}>
+            <span className="relative z-10">Search Donors</span>
+
+            {/* এই span টাই সমস্যা */}
+            <span
+              className="absolute inset-0 bg-red-100 translate-x-full hover:translate-x-0 
+                        transition-transform duration-300 ease-out"
+            ></span>
+          </Link>
+{/* xxxxxxxxxxxx */}
+          <Link to="/search-page" className={secondaryBtn}>
             <span className="relative z-10">Search Donors</span>
 
             {/* Slide Animation BG */}
